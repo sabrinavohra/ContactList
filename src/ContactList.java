@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class ContactList {
     private ArrayList<Person> contacts = new ArrayList<Person>();
@@ -12,6 +13,7 @@ public class ContactList {
     }
 
     public void addContact() {
+        Scanner s = new Scanner(System.in);
         System.out.println("Select a type of contact to add: \n 1. Student \n 2. Family Member");
         String secondInput = s.nextLine();
         System.out.println("Please fill out the following information: ");
@@ -45,10 +47,10 @@ public class ContactList {
         if(sortBy == 0) {
             for(int i = 1; i < contacts.size() - 1; i++) {
                 for(int j = 0; j < contacts.size() - i; j++) {
-                    String currentName = contacts[j].getFirstName();
-                    String nextName = contacts[j+1].getFirstName();
+                    String currentName = contacts.get(j).getFirstName();
+                    String nextName = contacts.get(j+1).getFirstName();
                     if(currentName.compareToIgnoreCase(nextName) <= -1) {
-                        contacts[j] = contacts[j+1];
+                        contacts.set(j, contacts.get(j+1));
                     }
                 }
             }
@@ -56,10 +58,10 @@ public class ContactList {
         else if(sortBy == 1) {
             for(int i = 1; i < contacts.size() - 1; i++) {
                 for(int j = 0; j < contacts.size() - i; j++) {
-                    String currentName = contacts[j].getLastName();
-                    String nextName = contacts[j+1].getLastName();
+                    String currentName = contacts.get(j).getLastName();
+                    String nextName = contacts.get(j+1).getLastName();
                     if(currentName.compareToIgnoreCase(nextName) <= -1) {
-                        contacts[j] = contacts[j+1];
+                        contacts.set(j, contacts.get(j+1));
                     }
                 }
             }
@@ -67,33 +69,62 @@ public class ContactList {
         else if(sortBy == 2) {
             for(int i = 0; i < contacts.size() - 1; i++) {
                 for(int j = 0; j < contacts.size() - i; j++) {
-                    String currentName = contacts[j].getPhoneNumber();
-                    String nextName = contacts[j+1].getPhoneNumber();
+                    String currentName = contacts.get(j).getPhoneNumber();
+                    String nextName = contacts.get(j+1).getPhoneNumber();
                     if(currentName.compareToIgnoreCase(nextName) <= -1) {
-                        contacts[j] = contacts[j+1];
+                        contacts.set(j, contacts.get(j+1));
                     }
                 }
             }
         }
     }
 
-    public ArrayList<Student> listStudents() {
-        ArrayList<Student> studentList = new ArrayList<>();
+    public ArrayList<Person> listStudents() {
+        ArrayList<Person> studentList = new ArrayList<Person>();
         for(Person c: contacts) {
-            if(c.instanceOf(Student)) {
+            if(c instanceof Student){
                 studentList.add(c);
             }
         }
         return studentList;
     }
 
+    public Person searchByFirstName(String firstName) {
+        for(Person c: contacts) {
+            if(c.getFirstName() == firstName) {
+                return c;
+            }
+        }
+        return null;
+    }
+
+    public Person searchByLastName(String lastName) {
+        for(Person c: contacts) {
+            if(c.getLastName() == lastName) {
+                return c;
+            }
+        }
+        return null;
+    }
+
+    public Person searchByPhoneNumber(String phoneNumber) {
+        for(Person c: contacts) {
+            if(c.getPhoneNumber() == phoneNumber) {
+                return c;
+            }
+        }
+        return null;
+    }
     public void run() {
-        System.out.println("Welcome to your Contacts List \n Please pick from the following menu options");
         Scanner s = new Scanner(System.in);
-        System.out.println("1. Add Contact \n 2. List All Contacts by First Name \n 3. List All Contacts by Last Name" +
-                "\n 4. List All Contacts by Phone Number \n 5. List All Students \n 6. Search by First Name \n 7. " +
-                "Search by Last Name \n 8. Search By Phone Number \n 0. Exit");
-        String input = s.nextLine();
+        String input;
+        do {
+            System.out.println("Welcome to your Contacts List \n Please pick from the following menu options");
+            System.out.println("1. Add Contact \n 2. List All Contacts by First Name \n 3. List All Contacts by Last Name" +
+                    "\n 4. List All Contacts by Phone Number \n 5. List All Students \n 6. Search by First Name \n 7. " +
+                    "Search by Last Name \n 8. Search By Phone Number \n 0. Exit");
+            input = s.nextLine();
+        } while(input == "");
         if(input == "1") {
             addContact();
         }
@@ -108,6 +139,21 @@ public class ContactList {
         }
         else if(input == "5") {
             listStudents();
+        }
+        else if(input == "6") {
+            String enterFirstName = s.nextLine();
+            searchByFirstName(enterFirstName);
+        }
+        else if(input == "7") {
+            String enterLastName = s.nextLine();
+            searchByLastName(enterLastName);
+        }
+        else if(input == "8") {
+            String enterPhoneNum = s.nextLine();
+            searchByPhoneNumber(enterPhoneNum);
+        }
+        else if(input == "0") {
+            return;
         }
     }
 }
