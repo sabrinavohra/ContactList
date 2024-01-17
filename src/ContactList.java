@@ -53,4 +53,10 @@ public class ContactList {
 
         }
     }
+
+    public void sort(int sortBy) {
+        if(sortBy == 0) {
+            
+        }
+    }
 }
