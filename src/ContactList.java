@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 public class ContactList {
     private ArrayList<Person> contacts = new ArrayList<Person>();
 
@@ -31,30 +33,11 @@ public class ContactList {
             Person a = new Family(firstName, lastName, phoneNum, relation);
             contacts.add(a);
         }
-
-        else if(secondInput == "3") {
-
-        }
     }
 
     public void printContacts() {
         for(Person contact: contacts) {
             System.out.println(contact);
-        }
-    }
-
-    public void run() {
-        System.out.println("Welcome to your Contacts List \n Please pick from the following menu options");
-        Scanner s = new Scanner(System.in);
-        System.out.println("1. Add Contact \n 2. List All Contacts by First Name \n 3. List All Contacts by Last Name" +
-                "\n 4. List All Contacts by Phone Number \n 5. List All Students \n 6. Search by First Name \n 7. " +
-                "Search by Last Name \n 8. Search By Phone Number \n 0. Exit");
-        String input = s.nextLine();
-        if(input == "1") {
-            addContact();
-        }
-        if(input == "2") {
-
         }
     }
 
@@ -94,5 +77,37 @@ public class ContactList {
         }
     }
 
+    public ArrayList<Student> listStudents() {
+        ArrayList<Student> studentList = new ArrayList<>();
+        for(Person c: contacts) {
+            if(c.instanceOf(Student)) {
+                studentList.add(c);
+            }
+        }
+        return studentList;
+    }
 
+    public void run() {
+        System.out.println("Welcome to your Contacts List \n Please pick from the following menu options");
+        Scanner s = new Scanner(System.in);
+        System.out.println("1. Add Contact \n 2. List All Contacts by First Name \n 3. List All Contacts by Last Name" +
+                "\n 4. List All Contacts by Phone Number \n 5. List All Students \n 6. Search by First Name \n 7. " +
+                "Search by Last Name \n 8. Search By Phone Number \n 0. Exit");
+        String input = s.nextLine();
+        if(input == "1") {
+            addContact();
+        }
+        else if(input == "2") {
+            sort(0);
+        }
+        else if(input == "3") {
+            sort(1);
+        }
+        else if(input == "4") {
+            sort(2);
+        }
+        else if(input == "5") {
+            listStudents();
+        }
+    }
 }
