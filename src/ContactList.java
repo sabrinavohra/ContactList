@@ -31,6 +31,10 @@ public class ContactList {
             Person a = new Family(firstName, lastName, phoneNum, relation);
             contacts.add(a);
         }
+
+        else if(secondInput == "3") {
+
+        }
     }
 
     public void printContacts() {
@@ -56,7 +60,39 @@ public class ContactList {
 
     public void sort(int sortBy) {
         if(sortBy == 0) {
-            
+            for(int i = 1; i < contacts.size() - 1; i++) {
+                for(int j = 0; j < contacts.size() - i; j++) {
+                    String currentName = contacts[j].getFirstName();
+                    String nextName = contacts[j+1].getFirstName();
+                    if(currentName.compareToIgnoreCase(nextName) <= -1) {
+                        contacts[j] = contacts[j+1];
+                    }
+                }
+            }
+        }
+        else if(sortBy == 1) {
+            for(int i = 1; i < contacts.size() - 1; i++) {
+                for(int j = 0; j < contacts.size() - i; j++) {
+                    String currentName = contacts[j].getLastName();
+                    String nextName = contacts[j+1].getLastName();
+                    if(currentName.compareToIgnoreCase(nextName) <= -1) {
+                        contacts[j] = contacts[j+1];
+                    }
+                }
+            }
+        }
+        else if(sortBy == 2) {
+            for(int i = 0; i < contacts.size() - 1; i++) {
+                for(int j = 0; j < contacts.size() - i; j++) {
+                    String currentName = contacts[j].getPhoneNumber();
+                    String nextName = contacts[j+1].getPhoneNumber();
+                    if(currentName.compareToIgnoreCase(nextName) <= -1) {
+                        contacts[j] = contacts[j+1];
+                    }
+                }
+            }
         }
     }
+
+
 }
