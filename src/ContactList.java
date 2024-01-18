@@ -1,3 +1,4 @@
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -54,7 +55,7 @@ public class ContactList {
     }
 
     // Method sorts Person objects in ContactList depending on specified sort method
-    public void sort(int sortBy) {
+    public ArrayList<Person> sort(int sortBy) {
         // Sorts contacts by first name
         if(sortBy == 0) {
             // Uses bubble sort to shift Person objects until they're in the right order
@@ -65,7 +66,7 @@ public class ContactList {
                     String nextName = contacts.get(j+1).getFirstName();
                     // Checks lexicographical order of two terms and compares them - substitutes them if they are in the
                     // wrong order
-                    if(currentName.compareToIgnoreCase(nextName) <= -1) {
+                    if(currentName.compareToIgnoreCase(nextName) >= 0) {
                         // Sets contact to right spot in ArrayList
                         Person a = contacts.get(j);
                         contacts.set(j, contacts.get(j+1));
@@ -102,6 +103,7 @@ public class ContactList {
                 }
             }
         }
+        return contacts;
     }
 
     // Lists all instances of Students within the ArrayList
@@ -163,21 +165,22 @@ public class ContactList {
                     "\n4. List All Contacts by Phone Number \n5. List All Students \n6. Search by First Name \n7. " +
                     "Search by Last Name \n8. Search By Phone Number \n0. Exit");
             input = s.nextInt();
+            String after = s.nextLine();
             // Adds contact to list if user selects that option
             if(input == 1) {
                 addContact();
             }
             // Sorts by first name depending
             else if(input == 2) {
-                sort(0);
+                System.out.println(sort(0));
             }
             // Sorts by last name
             else if(input == 3) {
-                sort(1);
+                System.out.println(sort(1));
             }
             // Sorts by phone number
             else if(input == 4) {
-                sort(2);
+                System.out.println(sort(2));
             }
             // Lists students
             else if(input == 5) {
@@ -186,7 +189,6 @@ public class ContactList {
             // Searches by first name using searchByFirstName method and user input
             else if(input == 6) {
                 System.out.println("Enter the first name you are searching for: ");
-                String after = s.nextLine();
                 String enterFirstName = s.nextLine();
                 System.out.println(searchByFirstName(enterFirstName));
             }
@@ -198,6 +200,7 @@ public class ContactList {
             }
             // Searches by phone number using searchByFirstName method and user input
             else if(input == 8) {
+                System.out.println("Enter the phone number you are searching for: ");
                 String enterPhoneNum = s.nextLine();
                 searchByPhoneNumber(enterPhoneNum);
             }
