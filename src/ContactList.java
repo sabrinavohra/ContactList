@@ -19,8 +19,9 @@ public class ContactList {
     public void addContact() {
         Scanner s = new Scanner(System.in);
         // Asks what kind of contact to add
-        System.out.println("Select a type of contact to add: \n 1. Student \n 2. Family Member");
+        System.out.println("Select a type of contact to add: \n1. Student \n2. Family Member");
         int secondInput = s.nextInt();
+        String next = s.nextLine();
         // Asks for information about contact in order to create the profile
         System.out.println("Please fill out the following information: ");
         System.out.println("First name: ");
@@ -157,50 +158,54 @@ public class ContactList {
         int input;
         // Prints message until user inputs correct info
         do {
-            System.out.println("Welcome to your Contacts List \n Please pick from the following menu options");
-            System.out.println("1. Add Contact \n 2. List All Contacts by First Name \n 3. List All Contacts by Last Name" +
-                    "\n 4. List All Contacts by Phone Number \n 5. List All Students \n 6. Search by First Name \n 7. " +
-                    "Search by Last Name \n 8. Search By Phone Number \n 0. Exit");
+            System.out.println("Welcome to your Contacts List \nPlease pick from the following menu options");
+            System.out.println("1. Add Contact \n2. List All Contacts by First Name \n3. List All Contacts by Last Name" +
+                    "\n4. List All Contacts by Phone Number \n5. List All Students \n6. Search by First Name \n7. " +
+                    "Search by Last Name \n8. Search By Phone Number \n0. Exit");
             input = s.nextInt();
-        } while(input == null);
-        // Adds contact to list if user selects that option
-        if(input == 1) {
-            addContact();
+            // Adds contact to list if user selects that option
+            if(input == 1) {
+                addContact();
+            }
+            // Sorts by first name depending
+            else if(input == 2) {
+                sort(0);
+            }
+            // Sorts by last name
+            else if(input == 3) {
+                sort(1);
+            }
+            // Sorts by phone number
+            else if(input == 4) {
+                sort(2);
+            }
+            // Lists students
+            else if(input == 5) {
+                listStudents();
+            }
+            // Searches by first name using searchByFirstName method and user input
+            else if(input == 6) {
+                System.out.println("Enter the first name you are searching for: ");
+                String after = s.nextLine();
+                String enterFirstName = s.nextLine();
+                System.out.println(searchByFirstName(enterFirstName));
+            }
+            // Searches by last name using searchByFirstName method and user input
+            else if(input == 7) {
+                String enterLastName = s.nextLine();
+                searchByLastName(enterLastName);
+            }
+            // Searches by phone number using searchByFirstName method and user input
+            else if(input == 8) {
+                String enterPhoneNum = s.nextLine();
+                searchByPhoneNumber(enterPhoneNum);
+            }
+            // Closes program if user wants to exit code
+            } while (input >= 0 && input <= 8);
         }
-        // Sorts by first name depending
-        else if(input == 2) {
-            sort(0);
-        }
-        // Sorts by last name
-        else if(input == 3) {
-            sort(1);
-        }
-        // Sorts by phone number
-        else if(input == 4) {
-            sort(2);
-        }
-        // Lists students
-        else if(input == 5) {
-            listStudents();
-        }
-        // Searches by first name using searchByFirstName method and user input
-        else if(input == 6) {
-            String enterFirstName = s.nextLine();
-            searchByFirstName(enterFirstName);
-        }
-        // Searches by last name using searchByFirstName method and user input
-        else if(input == 7) {
-            String enterLastName = s.nextLine();
-            searchByLastName(enterLastName);
-        }
-        // Searches by phone number using searchByFirstName method and user input
-        else if(input == 8) {
-            String enterPhoneNum = s.nextLine();
-            searchByPhoneNumber(enterPhoneNum);
-        }
-        // Closes program if user wants to exit code
-        else if(input == 0) {
-            return;
-        }
+
+    public static void main(String[] args) {
+        ContactList mine = new ContactList();
+        mine.run();
     }
 }
