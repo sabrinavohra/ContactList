@@ -192,6 +192,7 @@ public class ContactList {
             }
             // Searches by last name using searchByFirstName method and user input
             else if(input == 7) {
+                System.out.println("Enter the last name you are searching for: ");
                 String enterLastName = s.nextLine();
                 searchByLastName(enterLastName);
             }

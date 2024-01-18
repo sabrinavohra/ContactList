@@ -28,6 +28,6 @@ public class Person {
 
     // toString() method for Person that prints, "firstname lastname - #phone number"
     public String toString() {
-        return this.firstName + " " + this.lastName + " - #" + this.phoneNumber;
+        return this.firstName + " " + this.lastName + " - #" + this.phoneNumber + " ";
     }
 }
