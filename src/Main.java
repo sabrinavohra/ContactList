@@ -7,5 +7,5 @@ public class Main {
     myContacts.add(a);
     myContacts.add(b);
     ContactList mine = new ContactList(myContacts);
-    System.out.println(mine);
+    mine.run();
 }
