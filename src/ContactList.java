@@ -2,10 +2,10 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class ContactList {
-    private ArrayList<Person> contacts = new ArrayList<Person>();
+    private ArrayList<Person> contacts;
 
-    public ContactList(ArrayList<Person> people) {
-        contacts = people;
+    public ContactList() {
+        contacts = new ArrayList<Person>();
     }
 
     public ArrayList<Person> getContacts() {
@@ -15,7 +15,7 @@ public class ContactList {
     public void addContact() {
         Scanner s = new Scanner(System.in);
         System.out.println("Select a type of contact to add: \n 1. Student \n 2. Family Member");
-        String secondInput = s.nextLine();
+        int secondInput = s.nextInt();
         System.out.println("Please fill out the following information: ");
         System.out.println("First name: ");
         String firstName = s.nextLine();
@@ -23,13 +23,13 @@ public class ContactList {
         String lastName = s.nextLine();
         System.out.println("Phone Number: ");
         String phoneNum = s.nextLine();
-        if(secondInput == "1") {
+        if(secondInput == 1) {
             System.out.println("Grade: ");
             int stuGrade = s.nextInt();
             Person p = new Student(firstName, lastName, phoneNum, stuGrade);
             contacts.add(p);
         }
-        else if(secondInput == "2") {
+        else if(secondInput == 2) {
             System.out.println("Relation: ");
             String relation = s.nextLine();
             Person a = new Family(firstName, lastName, phoneNum, relation);
@@ -117,42 +117,42 @@ public class ContactList {
     }
     public void run() {
         Scanner s = new Scanner(System.in);
-        String input;
+        int input;
         do {
             System.out.println("Welcome to your Contacts List \n Please pick from the following menu options");
             System.out.println("1. Add Contact \n 2. List All Contacts by First Name \n 3. List All Contacts by Last Name" +
                     "\n 4. List All Contacts by Phone Number \n 5. List All Students \n 6. Search by First Name \n 7. " +
                     "Search by Last Name \n 8. Search By Phone Number \n 0. Exit");
-            input = s.nextLine();
-        } while(input == "");
-        if(input == "1") {
+            input = s.nextInt();
+        } while(input == null);
+        if(input == 1) {
             addContact();
         }
-        else if(input == "2") {
+        else if(input == 2) {
             sort(0);
         }
-        else if(input == "3") {
+        else if(input == 3) {
             sort(1);
         }
-        else if(input == "4") {
+        else if(input == 4) {
             sort(2);
         }
-        else if(input == "5") {
+        else if(input == 5) {
             listStudents();
         }
-        else if(input == "6") {
+        else if(input == 6) {
             String enterFirstName = s.nextLine();
             searchByFirstName(enterFirstName);
         }
-        else if(input == "7") {
+        else if(input == 7) {
             String enterLastName = s.nextLine();
             searchByLastName(enterLastName);
         }
-        else if(input == "8") {
+        else if(input == 8) {
             String enterPhoneNum = s.nextLine();
             searchByPhoneNumber(enterPhoneNum);
         }
-        else if(input == "0") {
+        else if(input == 0) {
             return;
         }
     }
