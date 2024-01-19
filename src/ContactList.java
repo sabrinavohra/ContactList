@@ -57,7 +57,7 @@ public class ContactList {
     // Method sorts Person objects in ContactList depending on specified sort method
     public void sort(int sortBy) {
         int comparisonResult = 0;
-        for(int i = 1; i < contacts.size() - 1; i++) {
+        for(int i = 0; i < contacts.size() - 1; i++) {
             for (int j = 0; j < contacts.size() - i - 1; j++) {
                 Person a = contacts.get(j);
                 Person b = contacts.get(j+1);
@@ -168,7 +168,7 @@ public class ContactList {
             }
             // Lists students
             else if(input == 5) {
-                listStudents();
+                System.out.println(listStudents());
             }
             // Searches by first name using searchByFirstName method and user input
             else if(input == 6) {
