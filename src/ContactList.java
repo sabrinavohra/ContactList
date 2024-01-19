@@ -55,55 +55,39 @@ public class ContactList {
     }
 
     // Method sorts Person objects in ContactList depending on specified sort method
-    public ArrayList<Person> sort(int sortBy) {
-        // Sorts contacts by first name
-        if(sortBy == 0) {
-            // Uses bubble sort to shift Person objects until they're in the right order
-            for(int i = 1; i < contacts.size() - 1; i++) {
-                for(int j = 0; j < contacts.size() - i; j++) {
-                    // Creates variables for objects being compared
-                    String currentName = contacts.get(j).getFirstName();
-                    String nextName = contacts.get(j+1).getFirstName();
-                    // Checks lexicographical order of two terms and compares them - substitutes them if they are in the
-                    // wrong order
-                    if(currentName.compareToIgnoreCase(nextName) >= 0) {
-                        // Sets contact to right spot in ArrayList
-                        Person a = contacts.get(j);
+    public void sort(int sortBy) {
+        int comparisonResult = 0;
+        for(int i = 1; i < contacts.size() - 1; i++) {
+            for (int j = 0; j < contacts.size() - i - 1; j++) {
+                Person a = contacts.get(j);
+                Person b = contacts.get(j+1);
+                if(sortBy == 0) {
+                    comparisonResult = a.getFirstName().compareToIgnoreCase(b.getFirstName());
+                    if(comparisonResult > 0) {
+                        Person c = contacts.get(j);
                         contacts.set(j, contacts.get(j+1));
-                        contacts.set(j+1, a);
+                        contacts.set(j+1, c);
+                    }
+                }
+                else if(sortBy == 1) {
+                    comparisonResult = a.getLastName().compareToIgnoreCase(b.getLastName());
+                    if(comparisonResult > 0) {
+                        Person c = contacts.get(j);
+                        contacts.set(j, contacts.get(j+1));
+                        contacts.set(j+1, c);
+                    }
+                }
+                else if(sortBy == 2) {
+                    comparisonResult = a.getPhoneNumber().compareToIgnoreCase(b.getPhoneNumber());
+                    if(comparisonResult > 0) {
+                        Person c = contacts.get(j);
+                        contacts.set(j, contacts.get(j+1));
+                        contacts.set(j+1, c);
                     }
                 }
             }
         }
-        // Sorts by last name in lexicographical order (uses similar algorithm to sorting by first name)
-        else if(sortBy == 1) {
-            for(int i = 1; i < contacts.size() - 1; i++) {
-                for(int j = 0; j < contacts.size() - i; j++) {
-                    String currentName = contacts.get(j).getLastName();
-                    String nextName = contacts.get(j+1).getLastName();
-                    if(currentName.compareToIgnoreCase(nextName) <= -1) {
-                        Person a = contacts.get(j);
-                        contacts.set(j, contacts.get(j+1));
-                        contacts.set(j+1, a);
-                    }
-                }
-            }
-        }
-        // Sorts Person objects by phone number
-        else if(sortBy == 2) {
-            for(int i = 0; i < contacts.size() - 1; i++) {
-                for(int j = 0; j < contacts.size() - i; j++) {
-                    String currentName = contacts.get(j).getPhoneNumber();
-                    String nextName = contacts.get(j+1).getPhoneNumber();
-                    if(currentName.compareToIgnoreCase(nextName) <= -1) {
-                        Person a = contacts.get(j);
-                        contacts.set(j, contacts.get(j+1));
-                        contacts.set(j+1, a);
-                    }
-                }
-            }
-        }
-        return contacts;
+        printContacts();
     }
 
     // Lists all instances of Students within the ArrayList
@@ -172,15 +156,15 @@ public class ContactList {
             }
             // Sorts by first name depending
             else if(input == 2) {
-                System.out.println(sort(0));
+                sort(0);
             }
             // Sorts by last name
             else if(input == 3) {
-                System.out.println(sort(1));
+                sort(1);
             }
             // Sorts by phone number
             else if(input == 4) {
-                System.out.println(sort(2));
+                sort(2);
             }
             // Lists students
             else if(input == 5) {
