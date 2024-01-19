@@ -180,16 +180,16 @@ public class ContactList {
             else if(input == 7) {
                 System.out.println("Enter the last name you are searching for: ");
                 String enterLastName = s.nextLine();
-                searchByLastName(enterLastName);
+                System.out.println(searchByLastName(enterLastName));
             }
             // Searches by phone number using searchByFirstName method and user input
             else if(input == 8) {
                 System.out.println("Enter the phone number you are searching for: ");
                 String enterPhoneNum = s.nextLine();
-                searchByPhoneNumber(enterPhoneNum);
+                System.out.println(searchByPhoneNumber(enterPhoneNum));
             }
             // Closes program if user wants to exit code
-            } while (input >= 0 && input <= 8);
+            } while (input > 0 && input <= 8);
         }
 
     public static void main(String[] args) {
